@@ -1,7 +1,7 @@
 import 'package:dummy_8/model/student_model.dart';
 import 'package:hive/hive.dart';
 
-class SudentService {
+class StudentService {
   final Box<StudentModel> studentbox = Hive.box<StudentModel>("List");
 
   Future<void> addData(StudentModel student) async {
