@@ -60,7 +60,7 @@ class _HomeState extends State<Home> {
                 controller: ageController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  hintText: "enter your age",
+                  hintText: "enter your ",
                 ),
               ),
               SizedBox(height: 20),
