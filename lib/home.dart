@@ -4,7 +4,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:dummy_8/service/sudent_service.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String username;
+  const Home({super.key, required this.username});
 
   @override
   State<Home> createState() => _HomeState();
@@ -80,6 +81,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Text(widget.username),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: const EdgeInsets.all(20),
         child: ValueListenableBuilder(
