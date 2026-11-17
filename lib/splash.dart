@@ -34,7 +34,9 @@ class _SplashState extends State<Splash> {
     if (logged) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home(username: username ?? "")),
+        MaterialPageRoute(
+          builder: (context) => Home(username: username ?? " "),
+        ),
       );
     } else {
       Navigator.pushReplacement(
