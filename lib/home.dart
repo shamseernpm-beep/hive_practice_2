@@ -82,6 +82,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 50,
         backgroundColor: Colors.blue,
         title: Text(widget.username),
         centerTitle: true,

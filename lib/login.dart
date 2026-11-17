@@ -14,18 +14,18 @@ class _LoginState extends State<Login> {
   final passwordController = TextEditingController();
 
   void click() async {
-    final username = usernameController.text;
-    final pass = passwordController.text;
+    String username = usernameController.text;
+    String pass = passwordController.text;
 
     if (username.isNotEmpty && pass.isNotEmpty) {
       final save = await SharedPreferences.getInstance();
       await save.setBool('login', true);
-
+      await save.setString('username', username);
       if (!mounted) return;
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home()),
+        MaterialPageRoute(builder: (context) => Home(username: username)),
       );
     } else {
       showDialog(
