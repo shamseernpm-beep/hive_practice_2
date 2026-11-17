@@ -27,12 +27,14 @@ class _SplashState extends State<Splash> {
 
     final logged = save.getBool('login') ?? false;
 
+    final String? username = save.getString('username');
+
     if (!mounted) return;
 
     if (logged) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home(username: 'username')),
+        MaterialPageRoute(builder: (context) => Home(username: username ?? "")),
       );
     } else {
       Navigator.pushReplacement(
