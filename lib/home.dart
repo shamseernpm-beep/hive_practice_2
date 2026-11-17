@@ -4,8 +4,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:dummy_8/service/sudent_service.dart';
 
 class Home extends StatefulWidget {
-  final String username;
-  const Home({super.key, required this.username});
+  final String name;
+  const Home({super.key, required this.name});
 
   @override
   State<Home> createState() => _HomeState();
@@ -84,7 +84,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         toolbarHeight: 50,
         backgroundColor: Colors.blue,
-        title: Text(widget.username),
+        title: Text(widget.name),
         centerTitle: true,
       ),
       body: Padding(
