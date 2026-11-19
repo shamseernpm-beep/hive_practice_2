@@ -3,13 +3,27 @@ import 'package:dummy_8/service/student_service.dart';
 import 'package:flutter/material.dart';
 
 class Add extends StatefulWidget {
-  const Add({super.key});
+  final StudentModel? student;
+  final int? index;
+  const Add({super.key, this.student, this.index});
 
   @override
   State<Add> createState() => _AddState();
 }
 
 class _AddState extends State<Add> {
+  @override
+  void initState() {
+    super.initState();
+
+    if (widget.student != null) {
+      usernameController.text = widget.student!.name;
+      ageController.text = widget.student!.age.toString();
+
+      editIndex = widget.index;
+    }
+  }
+
   final service = StudentService();
 
   int? editIndex;
@@ -27,15 +41,20 @@ class _AddState extends State<Add> {
     final username = usernameController.text;
     final age = ageController.text;
 
+    if (username.isEmpty || age.isEmpty) {
+      return;
+    }
+
     StudentModel student = StudentModel(
       name: username,
       age: int.tryParse(age.toString()) ?? 0,
     );
-    await service.addData(student);
+
     if (editIndex == null) {
       await service.addData(student);
     } else {
       await service.update(editIndex!, student);
+      editIndex = null;
     }
 
     if (!mounted) return;
@@ -73,7 +92,7 @@ class _AddState extends State<Add> {
               height: 50,
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () async {
+                onPressed: () {
                   press();
                 },
                 child: Text("Save"),
