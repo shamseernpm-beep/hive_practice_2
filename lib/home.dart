@@ -1,3 +1,4 @@
+import 'package:dummy_8/add.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -19,7 +20,12 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.blue,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => Add()),
+          );
+        },
         child: Icon(Icons.add),
       ),
     );
