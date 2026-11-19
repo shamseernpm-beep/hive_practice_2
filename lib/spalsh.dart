@@ -25,13 +25,13 @@ class _SplashState extends State<Splash> {
   void then() async {
     final save = await SharedPreferences.getInstance();
     final isLogged = save.getBool('login') ?? false;
-
+    final username = save.getString('username') ?? "";
     if (!mounted) return;
 
     if (isLogged) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home()),
+        MaterialPageRoute(builder: (context) => Home(username: username)),
       );
     } else {
       Navigator.pushReplacement(

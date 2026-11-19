@@ -21,12 +21,12 @@ class _LoginState extends State<Login> {
       final save = await SharedPreferences.getInstance();
 
       await save.setBool('login', true);
-
+      await save.setString('username', username);
       if (!mounted) return;
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Home()),
+        MaterialPageRoute(builder: (context) => Home(username: username)),
       );
     } else {
       showDialog(
@@ -62,7 +62,7 @@ class _LoginState extends State<Login> {
                   controller: passwordController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: "enter your passwordController",
+                    hintText: "enter your password",
                   ),
                 ),
                 SizedBox(height: 20),
