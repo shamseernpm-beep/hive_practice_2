@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:dummy_8/home.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -9,6 +10,34 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  void click() async {
+    final username = usernameController.text;
+    final password = passwordController.text;
+
+    if (username.isNotEmpty && password.isNotEmpty) {
+      final save = await SharedPreferences.getInstance();
+
+      await save.setBool('login', true);
+
+      if (!mounted) return;
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Home()),
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(title: Text("please fill your form"));
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +51,7 @@ class _LoginState extends State<Login> {
             child: Column(
               children: [
                 TextField(
+                  controller: usernameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: "enter your name",
@@ -29,13 +59,19 @@ class _LoginState extends State<Login> {
                 ),
                 SizedBox(height: 20),
                 TextField(
+                  controller: passwordController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: "enter your password",
+                    hintText: "enter your passwordController",
                   ),
                 ),
                 SizedBox(height: 20),
-                ElevatedButton(onPressed: () {}, child: Text("Submit")),
+                ElevatedButton(
+                  onPressed: () async {
+                    click();
+                  },
+                  child: Text("Submit"),
+                ),
               ],
             ),
           ),
